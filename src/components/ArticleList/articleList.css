@@ -1,0 +1,10 @@
+/* we are using #article to gain a higher css-specificity to override bootstrap styles (instead of using !important) */
+
+#articles .even-item {
+  color: #118888;
+}
+
+#articles .odd-item {
+  color: #ff5500;
+  background-color: #fef6ef;
+}

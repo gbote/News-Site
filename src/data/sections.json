@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Top",
+    "value": "topstories"
+  },
+  {
+    "label": "New",
+    "value": "newstories"
+  },
+  {
+    "label": "Best",
+    "value": "beststories"
+  },
+  {
+    "label": "Ask HN",
+    "value": "askstories"
+  },
+  {
+    "label": "Show HN",
+    "value": "showstories"
+  },
+  {
+    "label": "Job",
+    "value": "jobstories"
+  }
+]

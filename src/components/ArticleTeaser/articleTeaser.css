@@ -1,0 +1,18 @@
+.title {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.title-link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.title-link:hover {
+  text-decoration: inherit;
+}
+
+.date {
+  font-size: smaller;
+  font-style: italic;
+}
