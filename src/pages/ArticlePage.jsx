@@ -13,7 +13,7 @@ function ArticlePage() {
     .then((response) => {
       const promises = []
       
-      for (let i=0; i < 20; i++) {
+      for (let i=0; i < 49; i++) {
         promises.push(axios.get(`https://hacker-news.firebaseio.com/v0/item/${response.data[i]}.json`))  
       }
       Promise.all(promises).then((responses)=> {

@@ -10,7 +10,7 @@ function HomePage() {
   useEffect(() => {
     axios.get('https://hacker-news.firebaseio.com/v0/topstories.json').then((response) =>{
       const promises = []
-      for ( let i = 0; i < 20; i++) {
+      for ( let i = 0; i < 49; i++) {
         promises.push(axios.get(`https://hacker-news.firebaseio.com/v0/item/${response.data[i]}.json`))
       }
       // promise.all resolves to a list of resollved values, for each promise passed in.
