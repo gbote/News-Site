@@ -20,8 +20,8 @@ function AppNav(props) {
   return (
     <Navbar className="bar" id="nav-custom">
       <Navbar.Brand href="#" id="nav-logo">
-        <img src="https://raw.githubusercontent.com/katarzyna-kw/portfolio-website/main/public/img/cp-logo-white.png" width="60" />
-        Code Platoon News
+        <img src="../src/assets/logo.png" width="90" />
+        <strong> </strong> GRB's Top Trending News
       </Navbar.Brand>
       <Nav>
       {navItems.map((navItem, i) => (
