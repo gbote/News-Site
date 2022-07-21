@@ -20,7 +20,7 @@ function AppNav(props) {
   return (
     <Navbar className="bar" id="nav-custom">
       <Navbar.Brand href="#" id="nav-logo">
-        <img src="../src/assets/logo.png" width="90" />
+        <img src="https://raw.githubusercontent.com/gbote/News-Site/main/public/logo.png" width="90" />
         <strong> </strong> GRB's Top Trending News
       </Navbar.Brand>
       <Nav>
