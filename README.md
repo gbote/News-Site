@@ -1,4 +1,4 @@
-# News Site Part IV
+# News Site
 
 ## High Level Objectives
 
@@ -6,51 +6,25 @@
   2. Integrate the module above into the News Site app using the `useEffect()` hook.
   3. Slightly refactor the AppNav & ArticleDetails components
 
-## Initial Setup
-
-Again you have a choice to either use the solution code provided in this repo or to copy over your own code from the two previous News Site challenges.  If you choose to use your own code, the files you'll want to copy to this new codebase are:
-
- - src/App.js
- - src/components/Article/Article.js
- - src/components/ArticleList/ArticleList.js
- - src/components/ArticleTeaser/ArticleTeaser.js
- - src/components/AppNav/AppNav.js
- - src/pages/HomePage.js
- - src/pages/ArticlePage.js
-
-Once you've copied over these files, run ```npm install``` (NOTE: if you run into dependency issues, try running ```npm install --legacy-peer-deps``` instead) and then ```npm run start``` - verify that no errors appear in your browser console or terminal, and that your app functions the same as it did in the last challenge.
-
 ## The News/Article API
-So far, the data that drives our News Site has been contained within a static JSON file - `./src/data/news.json`.  We will now begin connecting our front-end to the hacker news API, that provides real news data. We should define at least 3 functions that help us fetch data from the API.
+So far, the data that drives our News Site has been contained within a static JSON file - `./src/data/news.json`.  I began connecting our front-end to the Hacker News API that provides real news data. 
 
-The functions are:
-- `fetchArticleByID(id)` - given an article ID, returns an Article object with the given ID.
-- `fetchArticlesBySection(section)` - returns a list of articles whose `section` attribute matches the section argument.
-- `fetchArticles(filters)` - returns a list of articles. The filters argument is optional - if no filters are provided, an array of all the articles are returned. If filters are provided, an array of Articles that meet the criteria are returned.
+For this, I used the async/await keywords.
+- To make API calls to outside resources within your React app, I had to use Axios to make `get` requests.
+- Axios is inheritantly asynchronous (i.e., not synchronous / happening out of order)
+- `Axios.get` returns a Javascript `Promise` object. These `Promise` objects are basically Javascript's immediate response to you, saying "Hey I have received your request. I `Promise` to respond when I can."
+- `Promise` objects must be resolved in order to get to the data using the [.then()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) function built into Javascript.
+- Error-handling with `.catch()`: Whenever calling out to an API, there is always a possibility of an error occuring. To handle this error on the client-side and give our user proper feedback, I attached on a [.catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) at the end of our promise chain.
 
-For this, we want you use async/await.
-- To make API calls to outside resources within your React app, you have to use axios to make `get` requests
-- axios is inheritantly asynchronous (i.e., not synchronous / happening out of order)
-- `axios.get` returns a Javascript `Promise` object. These `Promise` objects are basically Javascript's immediate response to you, saying "Hey I have received your request. I `Promise` to respond when I can."
-- `Promise` objects must be resolved in order to get to the data using the [.then()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) function built into Javascript
-- Error-handling with `.catch()`: whenever calling out to an API, there is always a possibility of an error occuring. To handle this error on the client-side and give our user proper feedback, we'll tack on a [.catch()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) at the end of our promise chain.
-
-## Integrating ArticlesAPI.js into your App
-At the moment, there are two components that use Article data:
-- `src/pages/HomePage`
-- `src/pages/ArticlePage`
-
-In these components, we're importing the `src/data/news.json` (which contains an array of Articles) and either passing it down directly (in the case of `HomePage.js`) or taking an Article out of the array and passing it down (in the case of `ArticlePage.js`).  Let's modify these pages to use data from the API instead.
-
-### React and the Virtual DOM
+## React and the Virtual DOM (Lecture/Instruction Notes)
 Before we dive into how our page compoments will use our client-side API methods, let's take a quick detour to better understand how React components work. For the sake of time, we'll keep this explanation at a high-level. For a deeper explanation, you can check out this [handy blog post](https://programmingwithmosh.com/react/react-virtual-dom-explained/) about the Virtual DOM. React itself just lightly touches upon the subject in its FAQ [here](https://reactjs.org/docs/faq-internals.html).
 
 The first thing to know is that traditional DOM manipulation is very slow. React quickly gained popularity as a framework because of its speed. Instead of repainting the _entire_ DOM whenever state is changed, React keeps a "virtual" representation of what the UI should look like, and when state changes, it compares the updated "virtual" representation to the actual DOM, identifies the differences, and _only_ updates what has changed.
 
-Since Facebook created React, we'll use their web app as an example. Looking at a facebook user's homepage, it's reasonable to assume that there are different components for stories, newsfeed, chat, etc. If a new story is added to the page, only the stories component needs to know about the state change and update itself and/or its child components accordingly. Or if you scroll down your newsfeed and trigger a new fetch for more posts (via infinite scroll), only the newsfeed component (and/or its child components) needs to update.
+Since Facebook created React, we'll use their web app as an example. Looking at a Facebook user's homepage, it's reasonable to assume that there are different components for stories, newsfeed, chat, etc. If a new story is added to the page, only the stories component needs to know about the state change and update itself and/or its child components accordingly. Or if you scroll down your newsfeed and trigger a new fetch for more posts (via infinite scroll), only the newsfeed component (and/or its child components) needs to update.
 
 ### Component Lifecycle Methods
-We'll be using the useEffect() hook to fetch our data from the API.
+I was using the useEffect() hook to fetch data from the API.
 
 ```javascript
 import { useState, useEffect } from 'react'
@@ -75,6 +49,7 @@ function Component {
 }
 ```
 
+## SIDE NOTES (My Personal Notes)
 We are using the `useEffect()` hook to tell React what we want to do after our component renders. Notice that `useEffect()` takes two arguments:
 
 1. A function to run after each render.
