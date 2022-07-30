@@ -1,3 +1,18 @@
 .bar {
-  background-color: #dddddd;
+  background-color: rgb(215, 86, 227);
+  height: 50px;
+}
+
+.home-link {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.home-link:hover {
+  text-decoration: inherit;
+  color: rgb(75, 0, 214);
+}
+
+.search {
+  height: 20px;
 }

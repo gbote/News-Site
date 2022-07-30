@@ -5,12 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --generic: #4B4E6D;
-  --generic-light: #61dafb;
-  --dark: #3434a9;
-  --accent--cool: #087a67;
-  --accent--cool--light: #84DCC6;
-  --neutral: #E3E0D8;
-  --accent--warm: #F36868;
-  --neutral--white: #fff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

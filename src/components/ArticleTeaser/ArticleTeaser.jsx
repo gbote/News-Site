@@ -1,24 +1,16 @@
 import "./articleTeaser.css"
 
-function ArticleTeaser(props) {
-
-  console.log("articles in AT from AL from HP: ", props)
-
-  const time = new Date(props.time * 1000)
-
-  console.log("time", time)
-
-  console.log("article url: ", props.url)
+function ArticleTeaser({article, pageUrl}) {
+  const time = new Date(article.time * 1000)
+  console.log(article.url)
   return (
-    <div>
+    <div >
       <div className="title">
-        <a href={props.url} className="title-link" target="_BLANK">
-          { props.title }
-        </a>
+        <a target='_blank' className='title-link' href={article.url}>{article.title}</a>
       </div>
-      <p className="date">
+      <div className='date'>
         { time.toLocaleDateString() }
-      </p>
+      </div>
     </div>
   )
 }

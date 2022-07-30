@@ -1,38 +1,37 @@
-import { useState } from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
-import sections from '../../data/sections.json'
+import {Navbar, Nav, NavLink, Form, FormControl, Button} from 'react-bootstrap'
 import "./appNav.css"
-import 'bootstrap/dist/css/bootstrap.css'
+import sections from '../../data/sections.json'
+import { useNavigate, Link } from "react-router-dom"
+import { useState } from 'react';
 
-
-function AppNav(props) {
+function AppNav() {
   const [navItems, setNavItems] = useState(sections)
 
-  // function that will navigate to route
-  let navigate = useNavigate()
-
-  const handleNavClick = (section) => {
-    // console.log(section)
+  let eachNav = navItems.map((item, index) => <NavLink  key={`${item}-${index}`} onClick={() => handleNavClick(item.value)} >{item.label}</NavLink>)
+  const navigate = useNavigate()
+  const handleNavClick = (section) => { 
     navigate(`/sections/${section}`)
   }
 
   return (
-    <Navbar className="bar" id="nav-custom">
-      <Navbar.Brand href="#" id="nav-logo">
-        <img src="https://raw.githubusercontent.com/gbote/News-Site/main/public/logo.png" width="90" />
-        <strong> </strong> GRB's Top Trending News
-      </Navbar.Brand>
-      <Nav>
-      {navItems.map((navItem, i) => (
-        <Nav.Link id="navlink-color" key={i} onClick={() => handleNavClick((navItem.value))}>
-          {navItem.label}
-        </Nav.Link>
-      ))}
-      </Nav>
-    </Navbar>
+    <div className='nav-container'>
+      <Navbar className='bar ml-auto'>
+        <Navbar.Brand>
+          <Link className='home-link' to='/'>
+            <img src="/logo.png" width="85" /> <strong></strong> 
+            GRB's Top Trending News
+          </Link>
+        </Navbar.Brand>
+          <Nav className="me-auto">
+              {eachNav}
+          </Nav>
+          <Form className="d-flex">
+            <FormControl type="search" placeholder="Search" className="search me-2" aria-label="Search"/>
+        </Form>
+      </Navbar>
+    </div>
+
   )
 }
 
 export default AppNav;
-

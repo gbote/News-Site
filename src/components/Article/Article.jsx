@@ -1,21 +1,23 @@
-import "./article.css";
+import {Card, Image, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
-function Article(props) {
-
-  const formatTime = () => {
-    
-  }
-
+function Article({ article,image }) {
+  console.log(article) 
   return (
-    <div className="article">
-      <h1>{props.title}</h1>
-      <p>{props.time}</p>
-      <a target="_blank" href={props.url}>Read the full article</a>
-    </div>
+    <>
+      <Card style={{ width: '18rem' }}>
+        {image && <Card.Image variant="top" src={image} />}
+        <Card.Body>
+          <Card.Title>{article.title}</Card.Title>
+          <Card.Text>{article.abstract}</Card.Text>
+          <Card.Text>{article.created_date}</Card.Text>
+          <Card.Text>{article.byline}</Card.Text>
+          <Link to={"/"}><Button variant="warning">Home</Button></Link>
+        </Card.Body>
+      </Card>
+
+    </>
   )
 }
 
 export default Article;
-
-
-// no longer being used in this current version

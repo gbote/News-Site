@@ -1,35 +1,32 @@
-import {useParams} from 'react-router-dom'
-import {useState, useEffect} from 'react'
-import axios from 'axios'
-import ArticleList from "../components/ArticleList/ArticleList.jsx";
+import ArticleList from '../components/ArticleList/ArticleList.jsx'
+import { useParams } from 'react-router-dom'
+import articlesAPI from '../api/ArticlesAPI.jsx';
+import React, { useState, useEffect } from 'react';
 
-const SectionPage = () => {
+function ArticlePage() {
 
-  const [ articles, setArticles ] = useState([])
-  const { section } = useParams()
-  console.log("context/section: ", section)
+  const [articles, setArticles] = useState([])
+  const { sectionName }= useParams()
 
   useEffect(() => {
-    console.log("section: ", section)
-    axios.get(`https://hacker-news.firebaseio.com/v0/${section}.json`)
-    .then((response) => {
+    articlesAPI.fetchArticlesBySection(sectionName).then((response) => {
       const promises = []
-      for ( let i = 0; i < 49; i++) {
-        promises.push(axios.get(`https://hacker-news.firebaseio.com/v0/item/${response.data[i]}.json`))  
-      }
-      Promise.all(promises).then((responses) => {
+      for ( let i = 0; i < 30; i++) {
+        promises.push(articlesAPI.fetchArticleByID(response.data[i]))
+      } 
+     Promise.all(promises).then((responses) => {
         setArticles(responses.map((response) => {
           return response.data
         }))
       })
     })
-  }, [section])
+  }, [sectionName])
 
   return (
-    <div>
+    <>
       <ArticleList articles={articles} />
-    </div>
+    </>
   )
 }
 
-export default SectionPage;
+export default ArticlePage;

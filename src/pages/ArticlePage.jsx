@@ -1,38 +1,20 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom";
-import axios from 'axios';
-import ArticleList from "../components/ArticleList/ArticleList.jsx";
+import Article from '../components/Article/Article.jsx'
+import News from '../data/news.json';
+import { useParams } from 'react-router-dom'
+import React, { useState } from 'react';
 
 function ArticlePage() {
-
-  const [articles, setArticles] = useState([])
-  const {section} = useParams()
-
-  useEffect(() => {
-    axios.get(`https://hacker-news.firebaseio.com/v0/${section}.json`)
-    .then((response) => {
-      const promises = []
-      
-      for (let i=0; i < 49; i++) {
-        promises.push(axios.get(`https://hacker-news.firebaseio.com/v0/item/${response.data[i]}.json`))  
-      }
-      Promise.all(promises).then((responses)=> {
-        setArticles(responses.map((response) => {
-          return response.data
-        }))
-      })
-    })
-  }, [section])
-
+  const params = useParams()
+  let articleIndex = params.articleID - 1;
+  const [article, setArticle] = useState(News[articleIndex])
   return (
     <div>
-      {
-        article 
-          ? <ArticleList articles={articles} />
-          : <span>404: Section Not Found</span>
+      {article 
+        ? <Article article={article} image={article.multimedia.length ? article.multimedia[2].url : null} /> 
+        : <span>404: Article Not Found</span>
       }
     </div>
-  );
+  )
 }
 
 export default ArticlePage;

@@ -1,9 +1,5 @@
 [
   {
-    "label": "Top",
-    "value": "topstories"
-  },
-  {
     "label": "New",
     "value": "newstories"
   },
@@ -12,15 +8,15 @@
     "value": "beststories"
   },
   {
-    "label": "Ask HN",
+    "label": "Ask TTN/HN",
     "value": "askstories"
   },
   {
-    "label": "Show HN",
+    "label": "Show TTN/HN",
     "value": "showstories"
   },
   {
-    "label": "Job",
+    "label": "Jobs",
     "value": "jobstories"
   }
 ]
